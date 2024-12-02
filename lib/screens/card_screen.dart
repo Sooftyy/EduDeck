@@ -66,7 +66,7 @@ class _CardScreenState extends State<CardScreen> {
     } else {
       // Inform the user to flip the card first
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Bitte drehe die Karte um, bevor du fortfahren kannst.')),
+        SnackBar(content: Text('Bitte drehe die Karte um, bevor du fortfährst.')),
       );
     }
   }
@@ -171,8 +171,12 @@ class _CardScreenState extends State<CardScreen> {
                     style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(height: 20),
+                  // Show "Next Card" button, but make it gray and disabled if the card isn't flipped
                   ElevatedButton(
-                    onPressed: nextCard, // Go to the next card
+                    onPressed: _isFlipped ? nextCard : null, // Disabled if card is not flipped
+                    style: ElevatedButton.styleFrom(
+                      primary: _isFlipped ? Colors.blue : Colors.grey, // Gray if disabled
+                    ),
                     child: Text('Nächste Karte'),
                   ),
                 ],
